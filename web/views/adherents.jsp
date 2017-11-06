@@ -9,7 +9,7 @@
 
     <jsp:body>
         <c:forEach items="${adherents}" var="adherent">
-            ${adherent.nomAdherent} <br />
+            ${adherent.nomAdherent} <a href="/adherents/modifier/${adherent.idAdherent}">Modifier</a> <a href="/adherents/supprimer/${adherent.idAdherent}">Supprimer</a> <br />
         </c:forEach>
     </jsp:body>
 </tags:layout>
