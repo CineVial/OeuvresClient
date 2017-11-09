@@ -15,7 +15,44 @@
     </head>
 
     <body>
+        <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="/">Médiathèque</a>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuAdherent" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gestion Adhérents
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/adherents/ajouter">Ajouter</a>
+                            <a class="dropdown-item" href="/adherents">Liste complète</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuOeuvre" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Gestion Oeuvre
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="/oeuvres">Ajouter</a>
+                            <a class="dropdown-item" href="/oeuvres/ajouter">Liste complète</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <br/>
+
         <jsp:doBody/>
+
+        <footer class="footer">
+            <div class="container">
+                <p class="text-muted text-center">Greyl - Paccaud - Roussel</p>
+            </div>
+        </footer>
     </body>
 
     <script type="text/javascript" src="<c:url value="/resources/js/jquery-3.2.1.js"/>"></script>
