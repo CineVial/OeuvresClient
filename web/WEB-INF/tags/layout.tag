@@ -28,8 +28,8 @@
                             Gestion Adhérents
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/adherents/ajouter">Ajouter</a>
-                            <a class="dropdown-item" href="/adherents">Liste complète</a>
+                            <a class="dropdown-item" href="<c:url value="/adherents/ajouter"/>">Ajouter</a>
+                            <a class="dropdown-item" href="<c:url value="/adherents"/>">Liste complète</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

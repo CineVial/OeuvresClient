@@ -11,7 +11,7 @@
         <div class="container">
             <h1>Bienvenue</h1>
 
-            <img src="/resources/images/index.jpg" alt="Mountain View">
+            <img src="<c:url value="/resources/images/index.jpg"/>" alt="Mountain View">
         </div>
     </jsp:body>
 </tags:layout>
