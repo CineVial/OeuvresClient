@@ -37,8 +37,8 @@
                             Gestion Oeuvre
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/oeuvres">Ajouter</a>
-                            <a class="dropdown-item" href="/oeuvres/ajouter">Liste complète</a>
+                            <a class="dropdown-item" href="/oeuvres/ajouter">Ajouter</a>
+                            <a class="dropdown-item" href="/oeuvres">Liste complète</a>
                         </div>
                     </li>
                 </ul>

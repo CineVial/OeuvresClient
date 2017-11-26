@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 
 import metier.Adherent;
 
+import metier.Oeuvrevente;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
@@ -125,21 +126,85 @@ public class MainController {
 
     @RequestMapping("/oeuvres")
     public String getOeuvres(Model model) {
+        try {
+            URL url = new URL(baseURL + "Oeuvres");
+            BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+            List<String> lines = br.lines().collect(Collectors.toList());
+            TypeToken listType = new TypeToken<ArrayList<Oeuvrevente>>(){};
+            List<Oeuvrevente> oeuvreventes = gson.fromJson(lines.get(0), listType.getType());
+            model.addAttribute("oeuvres", oeuvreventes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "oeuvres";
     }
 
     @RequestMapping("/oeuvres/ajouter")
     public String addOeuvre(Model model) {
+        Oeuvrevente oeuvrevente = new Oeuvrevente();
+        model.addAttribute("oeuvre", oeuvrevente);
         return "formOeuvre";
     }
 
     @RequestMapping("/oeuvres/modifier/{id}")
     public String alterOeuvre(Model model, @PathVariable("id") int id) {
+        List<Oeuvrevente> oeuvreventes = new ArrayList<>();
+        try {
+            URL url = new URL(baseURL + "Oeuvres");
+            BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+            List<String> lines = br.lines().collect(Collectors.toList());
+            TypeToken listType = new TypeToken<ArrayList<Oeuvrevente>>(){};
+            oeuvreventes = gson.fromJson(lines.get(0), listType.getType());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Oeuvrevente oeuvrevente = oeuvreventes.stream().filter(a -> a.getIdOeuvrevente() == id).findFirst().get();
+        model.addAttribute("oeuvre", oeuvrevente);
         return "formOeuvre";
     }
 
+    @RequestMapping("/oeuvres/insertion")
+    public String insertOeuvre(Model model, @ModelAttribute("oeuvrevente") @Validated Oeuvrevente oeuvrevente) {
+        String url = baseURL + "oeuvres/insertion";
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost post = new HttpPost(url);
+        StringEntity data = null;
+        try {
+            data = new StringEntity(gson.toJson(oeuvrevente));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        post.setEntity(data);
+        post.setHeader("Content-Type", "application/json");
+        HttpResponse response = null;
+        try {
+            response = httpClient.execute(post);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        boolean flag = (response != null && response.getStatusLine().getStatusCode() == 200);
+        model.addAttribute("success", flag);
+
+        return "redirect:/oeuvres";
+    }
+
+
     @RequestMapping("/oeuvres/supprimer/{id}")
     public String deleteOeuvre(Model model, @PathVariable("id") int id) {
+        String url = baseURL + "oeuvres/suppression/" + id;
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpDelete delete = new HttpDelete(url);
+        HttpResponse response = null;
+        try {
+            response = httpClient.execute(delete);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        boolean flag = (response != null && response.getStatusLine().getStatusCode() == 200);
+
+        model.addAttribute("success", flag);
         return "oeuvres";
     }
 }

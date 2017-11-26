@@ -15,14 +15,18 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
+                            <th>Prenom</th>
                             <th>Nom</th>
+                            <th>Ville</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                     <c:forEach items="${adherents}" var="adherent">
                     <tr>
+                        <td> ${adherent.prenomAdherent}</td>
                         <td> ${adherent.nomAdherent}</td>
+                        <td> ${adherent.villeAdherent}</td>
                         <td>
                             <a href="/adherents/modifier/${adherent.idAdherent}" class="btn btn-primary" role="button">Modifier</a>
                             <a href="/adherents/supprimer/${adherent.idAdherent}" class="btn btn-danger" role="button">Supprimer</a>

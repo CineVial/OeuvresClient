@@ -1,16 +1,40 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Robin
-  Date: 26/10/2017
-  Time: 10:30
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="tags" tagdir="/WEB-INF/tags" %>
 
-</body>
-</html>
+<tags:layout>
+    <jsp:attribute name="title">
+        Projet Oeuvre - Oeuvres
+    </jsp:attribute>
+
+    <jsp:body>
+        <div class="container">
+            <h1>Liste des Oeuvres</h1>
+
+            <div class="jumbotron">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Etat</th>
+                        <th>Prix</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${oeuvres}" var="oeuvre">
+                    <tr>
+                        <td> ${oeuvre.titreOeuvrevente}</td>
+                        <td> ${oeuvre.etatOeuvrevente}</td>
+                        <td> ${oeuvre.prixOeuvrevente}</td>
+                        <td>
+                            <a href="/oeuvres/modifier/${oeuvre.idOeuvrevente}" class="btn btn-primary" role="button">Modifier</a>
+                            <a href="/oeuvres/supprimer/${oeuvre.idOeuvrevente}" class="btn btn-danger" role="button">Supprimer</a>
+                        </td>
+                    </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </div>
+    </jsp:body>
+</tags:layout>
