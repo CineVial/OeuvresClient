@@ -20,7 +20,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <a class="navbar-brand" href="/">Médiathèque</a>
+            <a class="navbar-brand" href="<c:url value="/"/>">Médiathèque</a>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item dropdown">
@@ -37,8 +37,8 @@
                             Gestion Oeuvre
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/oeuvres/ajouter">Ajouter</a>
-                            <a class="dropdown-item" href="/oeuvres">Liste complète</a>
+                            <a class="dropdown-item" href="<c:url value="/oeuvres/ajouter"/>">Ajouter</a>
+                            <a class="dropdown-item" href="<c:url value="/oeuvres"/>">Liste complète</a>
                         </div>
                     </li>
                 </ul>

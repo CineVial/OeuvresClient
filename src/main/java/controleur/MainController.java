@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import metier.Adherent;
 
 import metier.Oeuvrevente;
+import metier.Proprietaire;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpDelete;
@@ -141,8 +142,19 @@ public class MainController {
 
     @RequestMapping("/oeuvres/ajouter")
     public String addOeuvre(Model model) {
+        try {
+            URL url = new URL(baseURL + "Proprietaires");
+            BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+            List<String> lines = br.lines().collect(Collectors.toList());
+            TypeToken listType = new TypeToken<ArrayList<Proprietaire>>(){};
+            List<Proprietaire> proprietaires = gson.fromJson(lines.get(0), listType.getType());
+            model.addAttribute("proprietaires", proprietaires);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Oeuvrevente oeuvrevente = new Oeuvrevente();
-        model.addAttribute("oeuvre", oeuvrevente);
+        model.addAttribute("oeuvrevente", oeuvrevente);
         return "formOeuvre";
     }
 
@@ -159,13 +171,24 @@ public class MainController {
             e.printStackTrace();
         }
 
+        try {
+            URL url = new URL(baseURL + "Proprietaires");
+            BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+            List<String> lines = br.lines().collect(Collectors.toList());
+            TypeToken listType = new TypeToken<ArrayList<Proprietaire>>(){};
+            List<Proprietaire> proprietaires = gson.fromJson(lines.get(0), listType.getType());
+            model.addAttribute("proprietaires", proprietaires);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Oeuvrevente oeuvrevente = oeuvreventes.stream().filter(a -> a.getIdOeuvrevente() == id).findFirst().get();
-        model.addAttribute("oeuvre", oeuvrevente);
+        model.addAttribute("oeuvrevente", oeuvrevente);
         return "formOeuvre";
     }
 
     @RequestMapping("/oeuvres/insertion")
-    public String insertOeuvre(Model model, @ModelAttribute("oeuvrevente") @Validated Oeuvrevente oeuvrevente) {
+    public String insertOeuvre(Model model, @ModelAttribute("oeuvrevente") Oeuvrevente oeuvrevente) {
         String url = baseURL + "oeuvres/insertion";
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost(url);
@@ -205,6 +228,6 @@ public class MainController {
         boolean flag = (response != null && response.getStatusLine().getStatusCode() == 200);
 
         model.addAttribute("success", flag);
-        return "oeuvres";
+        return "redirect:/oeuvres";
     }
 }
