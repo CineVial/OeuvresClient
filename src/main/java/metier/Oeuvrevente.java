@@ -11,9 +11,9 @@ import java.io.Serializable;
 public class Oeuvrevente implements Serializable {
 
 	private int idOeuvrevente;
+	private String titreOeuvrevente;
 	private String etatOeuvrevente;
 	private float prixOeuvrevente;
-	private String titreOeuvrevente;
 	private Proprietaire proprietaire;
 
 

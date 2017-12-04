@@ -2,9 +2,7 @@ package controleur;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import metier.Adherent;
-
 import metier.Oeuvrevente;
 import metier.Proprietaire;
 import org.apache.http.HttpResponse;
@@ -16,15 +14,11 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-
 import java.net.URL;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -187,8 +181,19 @@ public class MainController {
         return "formOeuvre";
     }
 
-    @RequestMapping("/oeuvres/insertion")
-    public String insertOeuvre(Model model, @ModelAttribute("oeuvrevente") Oeuvrevente oeuvrevente) {
+    @RequestMapping(value = "/oeuvres/insertion", method = RequestMethod.POST)
+    public String insertOeuvre(Model model,
+                               @RequestParam("titreOeuvrevente") String titreOeuvrevente,
+                               @RequestParam("etatOeuvrevente") String etatOeuvrevente,
+                               @RequestParam("prixOeuvrevente") float prixOeuvrevente,
+                               @RequestParam("proprietaire") Integer idProprietaire) {
+        Oeuvrevente oeuvrevente = new Oeuvrevente();
+        oeuvrevente.setTitreOeuvrevente(titreOeuvrevente);
+        oeuvrevente.setEtatOeuvrevente(etatOeuvrevente);
+        oeuvrevente.setPrixOeuvrevente(prixOeuvrevente);
+        Proprietaire proprietaire = new Proprietaire();
+        proprietaire.setIdProprietaire(idProprietaire);
+        oeuvrevente.setProprietaire(proprietaire);
         String url = baseURL + "oeuvres/insertion";
         HttpClient httpClient = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost(url);
