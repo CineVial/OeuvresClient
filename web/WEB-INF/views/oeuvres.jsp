@@ -18,6 +18,7 @@
                         <th>Titre</th>
                         <th>Etat</th>
                         <th>Prix</th>
+                        <th>Propriétaire</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
@@ -27,6 +28,7 @@
                         <td> ${oeuvre.titreOeuvrevente}</td>
                         <td> ${oeuvre.etatOeuvrevente}</td>
                         <td> ${oeuvre.prixOeuvrevente}</td>
+                        <td> ${oeuvre.proprietaire.prenomProprietaire} ${oeuvre.proprietaire.nomProprietaire}</td>
                         <td>
                             <a href="/oeuvres/modifier/${oeuvre.idOeuvrevente}" class="btn btn-primary" role="button">Modifier</a>
                             <a href="/oeuvres/supprimer/${oeuvre.idOeuvrevente}" class="btn btn-danger" role="button">Supprimer</a>

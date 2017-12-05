@@ -34,7 +34,7 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuOeuvre" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Gestion Oeuvre
+                            Gestion Oeuvres
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item" href="<c:url value="/oeuvres/ajouter"/>">Ajouter</a>

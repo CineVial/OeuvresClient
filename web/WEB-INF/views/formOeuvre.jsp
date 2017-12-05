@@ -20,13 +20,13 @@
                     <form:input path="titreOeuvrevente" type="text" required="true" />
 
                     <form:label path="etatOeuvrevente"> Etat : </form:label>
-                    <form:input path="etatOeuvrevente" type="text" required="true" />
+                    <form:input path="etatOeuvrevente" type="text" required="true" maxlength="1"/>
 
                     <form:label path="prixOeuvrevente"> Prix : </form:label>
                     <form:input path="prixOeuvrevente" type="number" required="true" />
 
                     <form:label path="proprietaire">Propriétaire : </form:label>
-                    <form:select path="proprietaire" items="${proprietaires}" itemLabel="nomProprietaire" itemValue="idProprietaire" class="form-control" />
+                    <form:select path="proprietaire" items="${proprietaires}" itemLabel="nomProprietaire" itemValue="idProprietaire"/>
 
                     <button type="submit" class="btn btn-success">Enregistrer</button>
                 </form:form>

@@ -186,11 +186,18 @@ public class MainController {
                                @RequestParam("titreOeuvrevente") String titreOeuvrevente,
                                @RequestParam("etatOeuvrevente") String etatOeuvrevente,
                                @RequestParam("prixOeuvrevente") float prixOeuvrevente,
-                               @RequestParam("proprietaire") Integer idProprietaire) {
+                               @RequestParam("proprietaire") Integer idProprietaire,
+                               @RequestParam(name="idOeuvrevente",required=false) Integer idOeuvrevente) {
         Oeuvrevente oeuvrevente = new Oeuvrevente();
         oeuvrevente.setTitreOeuvrevente(titreOeuvrevente);
-        oeuvrevente.setEtatOeuvrevente(etatOeuvrevente);
+        oeuvrevente.setEtatOeuvrevente(etatOeuvrevente.toUpperCase());
         oeuvrevente.setPrixOeuvrevente(prixOeuvrevente);
+
+        if(idOeuvrevente==null)
+            idOeuvrevente = 0;
+
+        oeuvrevente.setIdOeuvrevente(idOeuvrevente);
+
         Proprietaire proprietaire = new Proprietaire();
         proprietaire.setIdProprietaire(idProprietaire);
         oeuvrevente.setProprietaire(proprietaire);
